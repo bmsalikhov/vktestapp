@@ -26,4 +26,9 @@ public class User {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "ROLE", nullable = false)
+    private String role;
+
 }

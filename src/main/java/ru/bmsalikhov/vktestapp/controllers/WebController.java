@@ -1,10 +1,22 @@
 package ru.bmsalikhov.vktestapp.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import ru.bmsalikhov.vktestapp.services.LogsService;
+
+import javax.sql.rowset.serial.SerialStruct;
 
 @Controller
 public class WebController {
+
+    private LogsService logsService;
+
+    public WebController(LogsService logsService) {
+        this.logsService = logsService;
+    }
+
 
     @GetMapping("/usr")
     public String users() {
@@ -19,6 +31,12 @@ public class WebController {
     @GetMapping("/alb")
     public String albums() {
         return "albums";
+    }
+
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("logs", logsService.findAllLogs());
+        return "index";
     }
 
 }

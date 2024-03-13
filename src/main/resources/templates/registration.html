@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+    <form th:action="@{/registration}" method="post">
+        <input type="text" name="username" placeholder="login">
+        <input type="text" name="password" placeholder="pass">
+        <input type="text" name="role" placeholder="enter the role">
+        <button type="submit">sign up</button>
+    </form>
+</body>
+</html>
