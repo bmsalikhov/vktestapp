@@ -1,6 +1,5 @@
 package ru.bmsalikhov.vktestapp.services;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 import ru.bmsalikhov.vktestapp.config.CustomUserDetails;
 import ru.bmsalikhov.vktestapp.models.User;
 import ru.bmsalikhov.vktestapp.repos.UserRepository;

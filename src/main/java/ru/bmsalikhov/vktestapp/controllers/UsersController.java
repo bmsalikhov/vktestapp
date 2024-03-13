@@ -3,19 +3,16 @@ package ru.bmsalikhov.vktestapp.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.bmsalikhov.vktestapp.models.Log;
-import ru.bmsalikhov.vktestapp.models.Role;
 import ru.bmsalikhov.vktestapp.models.postsdto.PostDto;
 import ru.bmsalikhov.vktestapp.models.usersdto.UserDto;
 import ru.bmsalikhov.vktestapp.services.JsonPlaceHolderUsersService;
 import ru.bmsalikhov.vktestapp.services.LogsService;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
