@@ -98,9 +98,9 @@
         $scope.deleteUserById = function () {
             $http({
                url: '/api/users/' + $scope.deleteUserId.id,
-               method: 'DELETE'
+               method: 'Delete'
             }).then(function (response) {
-                $scope.htppResponseStatusDeleteUserById = response.status;
+                $scope.httpResponseStatusDeleteUserById = response.status;
             });
         }
         $scope.getUserPosts = function () {
@@ -221,7 +221,7 @@
         <button ng-click="putUser()" type="button">put User</button>
     </form>
 
-    <div>{{ htppResponseStatusDeleteUserById }}</div>
+    <div>{{ httpResponseStatusDeleteUserById }}</div>
     <form>
         <label>
             id:
