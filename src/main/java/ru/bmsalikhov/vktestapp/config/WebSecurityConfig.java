@@ -22,6 +22,12 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/registration").permitAll()
+                        .requestMatchers("/api/posts").hasAnyRole("POSTS", "ADMIN")
+                        .requestMatchers("/pos").hasAnyRole("POSTS, ADMIN")
+                        .requestMatchers("/api/albums").hasAnyRole("ALBUMS", "ADMIN")
+                        .requestMatchers("/alb").hasAnyRole("ALBUMS", "ADMIN")
+                        .requestMatchers("/api/users").hasAnyRole("USERS", "ADMIN")
+                        .requestMatchers("/usr").hasAnyRole("USERS", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
