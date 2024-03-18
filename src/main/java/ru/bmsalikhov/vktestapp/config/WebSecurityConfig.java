@@ -17,21 +17,24 @@ import ru.bmsalikhov.vktestapp.services.UserService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    private static final String ADMIN = "ADMIN";
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
+                .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/registration").permitAll()
-                        .requestMatchers("/api/posts").hasAnyRole("POSTS", "ADMIN")
-                        .requestMatchers("/pos").hasAnyRole("POSTS, ADMIN")
-                        .requestMatchers("/api/albums").hasAnyRole("ALBUMS", "ADMIN")
-                        .requestMatchers("/alb").hasAnyRole("ALBUMS", "ADMIN")
-                        .requestMatchers("/api/users").hasAnyRole("USERS", "ADMIN")
-                        .requestMatchers("/usr").hasAnyRole("USERS", "ADMIN")
+                        .requestMatchers("/api/posts").hasAnyRole("POSTS", ADMIN)
+                        .requestMatchers("/pos").hasAnyRole("POSTS", ADMIN)
+                        .requestMatchers("/api/albums").hasAnyRole("ALBUMS", ADMIN)
+                        .requestMatchers("/alb").hasAnyRole("ALBUMS", ADMIN)
+                        .requestMatchers("/api/users").hasAnyRole("USERS", ADMIN)
+                        .requestMatchers("/usr").hasAnyRole("USERS", ADMIN)
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin((form) -> form
+                .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
                 )
