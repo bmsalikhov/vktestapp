@@ -1,5 +1,7 @@
 package ru.bmsalikhov.vktestapp.services;
 
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ru.bmsalikhov.vktestapp.models.Log;
 import ru.bmsalikhov.vktestapp.repos.LogsRepository;
@@ -15,6 +17,13 @@ public class LogsService {
 
     public void saveLog(Log log) {
         logsRepository.save(log);
+    }
+    public void saveLog(UserDetails userDetails, HttpServletRequest request, String result) {
+        saveLog(new Log(
+                userDetails.getUsername(),
+                request.getRequestURI(),
+                result
+        ));
     }
 
     public Iterable<Log> findAllLogs() {

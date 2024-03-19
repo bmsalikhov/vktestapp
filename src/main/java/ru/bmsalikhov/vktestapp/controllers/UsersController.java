@@ -1,5 +1,6 @@
 package ru.bmsalikhov.vktestapp.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,38 +21,50 @@ public class UsersController {
     private final LogsService logsService;
 
     @GetMapping
-    public ResponseEntity<UserDto[]> getAllUsers(@AuthenticationPrincipal UserDetails userDetails) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users", "successful"));
+    public ResponseEntity<UserDto[]> getAllUsers(@AuthenticationPrincipal UserDetails userDetails,
+                                                 HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderUsersService.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users/" + id, "successful"));
+    public ResponseEntity<UserDto> getUser(@AuthenticationPrincipal UserDetails userDetails,
+                                           @PathVariable String id,
+                                           HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderUsersService.getUser(id));
     }
 
     @PostMapping
-    public UserDto addUser(@AuthenticationPrincipal UserDetails userDetails, @RequestBody UserDto userDto) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users", "successful"));
+    public UserDto addUser(@AuthenticationPrincipal UserDetails userDetails,
+                           @RequestBody UserDto userDto,
+                           HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderUsersService.addUser(userDto);
     }
 
     @PutMapping("/{id}")
-    public int putUser(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id, @RequestBody UserDto userDto) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users/" + id, "successful"));
+    public int putUser(@AuthenticationPrincipal UserDetails userDetails,
+                       @PathVariable String id,
+                       @RequestBody UserDto userDto,
+                       HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderUsersService.putUser(userDto, id);
     }
 
     @DeleteMapping("/{id}")
-    public int deleteUser(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users/" + id, "successful"));
+    public int deleteUser(@AuthenticationPrincipal UserDetails userDetails,
+                          @PathVariable String id,
+                          HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderUsersService.deleteUser(id);
     }
 
     @GetMapping("/{id}/posts")
-    public ResponseEntity<PostDto[]> getUserPosts(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/users" + id + "/posts", "successful"));
+    public ResponseEntity<PostDto[]> getUserPosts(@AuthenticationPrincipal UserDetails userDetails,
+                                                  @PathVariable String id,
+                                                  HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderUsersService.getUserPosts(id));
     }
 

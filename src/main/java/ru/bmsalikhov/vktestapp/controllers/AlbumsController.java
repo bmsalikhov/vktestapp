@@ -1,6 +1,8 @@
 package ru.bmsalikhov.vktestapp.controllers;
 
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,38 +23,50 @@ public class AlbumsController {
     private final LogsService logsService;
 
     @GetMapping
-    public ResponseEntity<AlbumDto[]> getAllAlbums(@AuthenticationPrincipal UserDetails userDetails) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums", "successful"));
+    public ResponseEntity<AlbumDto[]> getAllAlbums(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderAlbumsService.getAllAlbums());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlbumDto> getAlbum(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums" + id, "successful"));
+    public ResponseEntity<AlbumDto> getAlbum(@AuthenticationPrincipal UserDetails userDetails,
+                                             @PathVariable String id,
+                                             HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderAlbumsService.getAlbum(id));
     }
 
     @PostMapping
-    public AlbumDto addAlbum(@AuthenticationPrincipal UserDetails userDetails, @RequestBody AlbumDto albumDto) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums", "successful"));
+    public AlbumDto addAlbum(@AuthenticationPrincipal UserDetails userDetails,
+                             @RequestBody AlbumDto albumDto,
+                             HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderAlbumsService.addAlbum(albumDto);
     }
 
     @PutMapping("/{id}")
-    public int putAlbum(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id, @RequestBody AlbumDto albumDto) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums/" + id, "successful"));
+    public int putAlbum(@AuthenticationPrincipal UserDetails userDetails,
+                        @PathVariable String id,
+                        @RequestBody AlbumDto albumDto,
+                        HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderAlbumsService.putAlbum(albumDto, id);
     }
 
     @DeleteMapping("/{id}")
-    public int deleteAlbum(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums/" + id, "successful"));
+    public int deleteAlbum(@AuthenticationPrincipal UserDetails userDetails,
+                           @PathVariable String id,
+                           HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return jsonPlaceHolderAlbumsService.deleteAlbum(id);
     }
 
     @GetMapping("/{id}/photos")
-    public ResponseEntity<PhotoDto[]> getAlbumPhotos(@AuthenticationPrincipal UserDetails userDetails, @PathVariable String id) {
-        logsService.saveLog(new Log(userDetails.getUsername(), "/api/albums/" + id + "/photos", "successful"));
+    public ResponseEntity<PhotoDto[]> getAlbumPhotos(@AuthenticationPrincipal UserDetails userDetails,
+                                                     @PathVariable String id,
+                                                     HttpServletRequest request) {
+        logsService.saveLog(userDetails, request, "successful");
         return ResponseEntity.ok(jsonPlaceHolderAlbumsService.getAlbumPhotos(id));
     }
+
 }
