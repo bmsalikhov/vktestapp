@@ -30,6 +30,11 @@ public class WebController {
         return "albums";
     }
 
+    @GetMapping("/usrtest")
+    public String testing() {
+        return "userstest";
+    }
+
     @GetMapping
     public String index(Model model) {
         model.addAttribute("logs", logsService.findAllLogs());

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+</head>
+<script type="text/javascript">
+    var app = angular.module("TEST", []);
+    app.controller("TST", function($scope, $http) {
+        $scope.getAllUsers = function() {
+            $http({
+                url: '/api/users',
+                method: 'GET'
+            }).then(function (response) {
+                $scope.httpResponseStatusGetAllUsers = response.status;
+                $scope.httpResponseGetAllUsers = response.data;
+            });
+        }
+    })
+</script>
+<body ng-app="TEST" ng-controller="TST">
+    <div>{{ httpResponseStatusGetAllUsers }}</div>
+    <div>{{ httpResponseGetAllUsers }}</div>
+    <button ng-click="getAllUsers()" type="button">getAllUsers</button>
+</body>
+</html>
