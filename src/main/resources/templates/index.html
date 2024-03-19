@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Main page</title>
     <style>
         tr, td {
             border: 1px solid black;
@@ -10,6 +10,9 @@
     </style>
 </head>
 <body>
+<form action="/logout" method="post">
+    <button type="submit" class="btn btn-primary">Sign Out</button>
+</form><br>
 <a href="/usr">Go to Users Controller</a><br>
 <a href="/pos">Go to Posts Controller</a><br>
 <a href="/alb">Go to Albums Controller</a><br>

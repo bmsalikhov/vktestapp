@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.server.authentication.logout.DelegatingServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.WebSessionServerLogoutHandler;
 import ru.bmsalikhov.vktestapp.services.UserService;
 
 @Configuration
@@ -24,7 +27,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/registration").permitAll()
+                        .requestMatchers("/registration").permitAll()
                         .requestMatchers("/api/posts").hasAnyRole("POSTS", ADMIN)
                         .requestMatchers("/pos").hasAnyRole("POSTS", ADMIN)
                         .requestMatchers("/api/albums").hasAnyRole("ALBUMS", ADMIN)
